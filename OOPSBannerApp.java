@@ -1,14 +1,21 @@
 /**
  * OOPSBannerApp
  *
- * UC1: Prints the word "OOPS" to the console.
+ * UC2: Render OOPS as Banner using Print Statements
  *
  * @author Hemanth
- * @version 1.0
+ * @version 2.0
  */
 public class OOPSBannerApp {
 
     public static void main(String[] args) {
-        System.out.println("OOPS");
+
+        System.out.println("  ***     " + "  ***     " + " *****   " + " ***** ");
+        System.out.println(" ** **    " + " ** **    " + " **  **  " + " **    ");
+        System.out.println("**   **   " + "**   **   " + " **   ** " + " **    ");
+        System.out.println("**   **   " + "**   **   " + " *****   " + " ***   ");
+        System.out.println("**   **   " + "**   **   " + " **      " + "   **  ");
+        System.out.println(" ** **    " + " ** **    " + " **      " + "   **  ");
+        System.out.println("  ***     " + "  ***     " + " **      " + " ***** ");
     }
 }
