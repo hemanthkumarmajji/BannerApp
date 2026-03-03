@@ -17,17 +17,6 @@ public class OOPSBannerApp {
 
     public static void main(String[] args) {
 
-<<<<<<< HEAD
-        System.out.println("  ***     " + "  ***     " + " *****   " + " ***** ");
-        System.out.println(" ** **    " + " ** **    " + " **  **  " + " **    ");
-        System.out.println("**   **   " + "**   **   " + " **   ** " + " **    ");
-        System.out.println("**   **   " + "**   **   " + " *****   " + " ***   ");
-        System.out.println("**   **   " + "**   **   " + " **      " + "   **  ");
-        System.out.println(" ** **    " + " ** **    " + " **      " + "   **  ");
-        System.out.println("  ***     " + "  ***     " + " **      " + " ***** ");
-    }
-}
-=======
         // UC5: Inline Array Initialization using String.join()
         // We use an empty string "" as the delimiter to glue your exact strings together
         String[] banner = {
@@ -46,4 +35,3 @@ public class OOPSBannerApp {
         }
     }
 }
->>>>>>> main
