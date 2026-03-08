@@ -1,71 +1,91 @@
 /**
  * OOPSBannerApp
  *
- * UC6: Render OOPS as Banner using Static Functions
+ * UC7: Store Character Pattern in a Class
  *
  * @author Hemanth
- * @version 6.0
+ * @version 7.0
  */
 public class OOPSBannerApp {
 
-    // 1. Static helper method for the letter 'O'
-    public static String[] getO() {
-        return new String[] {
-            "  *** ",
-            " ** ** ",
-            "** ** ",
-            "** ** ",
-            "** ** ",
-            " ** ** ",
-            "  *** "
-        };
+    /**
+     * Part 2: Inner Static Class
+     * Encapsulates the character and its corresponding ASCII pattern
+     */
+    public static class CharacterPatternMap {
+        // Instance Variables
+        private char character;
+        private String[] pattern;
+
+        // Constructor
+        public CharacterPatternMap(char character, String[] pattern) {
+            this.character = character;
+            this.pattern = pattern;
+        }
+
+        // Getters
+        public char getCharacter() {
+            return character;
+        }
+
+        public String[] getPattern() {
+            return pattern;
+        }
     }
 
-    // 2. Static helper method for the letter 'P'
-    public static String[] getP() {
-        return new String[] {
-            " ***** ",
-            " ** ** ",
-            " ** ** ",
-            " ***** ",
-            " ** ",
-            " ** ",
-            " ** "
-        };
+    /**
+     * Part 3: Utility Static Method
+     * Abstracts the lookup mechanism to return the right pattern object
+     * * @param c the character to lookup
+     * @return CharacterPatternMap object containing the pattern
+     */
+    public static CharacterPatternMap getCharacterPattern(char c) {
+        if (c == 'O') {
+            return new CharacterPatternMap('O', new String[]{
+                "  *** ", " ** ** ", "** ** ", "** ** ", "** ** ", " ** ** ", "  *** "
+            });
+        } else if (c == 'P') {
+            return new CharacterPatternMap('P', new String[]{
+                " ***** ", " ** ** ", " ** ** ", " ***** ", " ** ", " ** ", " ** "
+            });
+        } else if (c == 'S') {
+            return new CharacterPatternMap('S', new String[]{
+                " ***** ", " ** ", " ** ", " *** ", "   ** ", "   ** ", " ***** "
+            });
+        }
+        return null; // Return null if character is not found
     }
 
-    // 3. Static helper method for the letter 'S'
-    public static String[] getS() {
-        return new String[] {
-            " ***** ",
-            " ** ",
-            " ** ",
-            " *** ",
-            "   ** ",
-            "   ** ",
-            " ***** "
-        };
-    }
-
+    /**
+     * Part 4: Main Method
+     */
     public static void main(String[] args) {
         
-        // Retrieve the arrays from our static methods
-        String[] o = getO();
-        String[] p = getP();
-        String[] s = getS();
-
-        // UC6: Build the banner using the arrays
-        String[] banner = {
-            String.join("", o[0], o[0], p[0], s[0]),
-            String.join("", o[1], o[1], p[1], s[1]),
-            String.join("", o[2], o[2], p[2], s[2]),
-            String.join("", o[3], o[3], p[3], s[3]),
-            String.join("", o[4], o[4], p[4], s[4]),
-            String.join("", o[5], o[5], p[5], s[5]),
-            String.join("", o[6], o[6], p[6], s[6])
+        // Array of Objects to manage multiple characters for the word "OOPS"
+        CharacterPatternMap[] oopsArray = {
+            getCharacterPattern('O'),
+            getCharacterPattern('O'),
+            getCharacterPattern('P'),
+            getCharacterPattern('S')
         };
 
-        // Print the banner
+        // Array to hold the final assembled 7 lines of the banner
+        String[] banner = new String[7];
+
+        // Loop through 7 lines, using StringBuilder for efficient concatenation
+        for (int i = 0; i < 7; i++) {
+            StringBuilder sb = new StringBuilder();
+            
+            // Loop through each letter object in our word
+            for (CharacterPatternMap letterMap : oopsArray) {
+                sb.append(letterMap.getPattern()[i]);
+            }
+            
+            // Convert the built string and store it in our final banner array
+            banner[i] = sb.toString();
+        }
+
+        // Output the final banner
         for (String line : banner) {
             System.out.println(line);
         }
