@@ -1,93 +1,67 @@
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * OOPSBannerApp
  *
- * UC7: Store Character Pattern in a Class
+ * UC8: Use Map for Character Patterns and Render via Function
  *
  * @author Hemanth
- * @version 7.0
+ * @version 8.0
  */
 public class OOPSBannerApp {
 
     /**
-     * Part 2: Inner Static Class
-     * Encapsulates the character and its corresponding ASCII pattern
+     * Part 2: Utility Static Method to create and populate the HashMap
+     * @return A Map containing characters as keys and their string array patterns as values
      */
-    public static class CharacterPatternMap {
-        // Instance Variables
-        private char character;
-        private String[] pattern;
+    public static Map<Character, String[]> createPatternMap() {
+        Map<Character, String[]> patternMap = new HashMap<>();
 
-        // Constructor
-        public CharacterPatternMap(char character, String[] pattern) {
-            this.character = character;
-            this.pattern = pattern;
-        }
+        // Load the patterns into the Map
+        patternMap.put('O', new String[]{
+            "  *** ", " ** ** ", "** ** ", "** ** ", "** ** ", " ** ** ", "  *** "
+        });
+        patternMap.put('P', new String[]{
+            " ***** ", " ** ** ", " ** ** ", " ***** ", " ** ", " ** ", " ** "
+        });
+        patternMap.put('S', new String[]{
+            " ***** ", " ** ", " ** ", " *** ", "   ** ", "   ** ", " ***** "
+        });
 
-        // Getters
-        public char getCharacter() {
-            return character;
-        }
-
-        public String[] getPattern() {
-            return pattern;
-        }
+        return patternMap;
     }
 
     /**
-     * Part 3: Utility Static Method
-     * Abstracts the lookup mechanism to return the right pattern object
-     * * @param c the character to lookup
-     * @return CharacterPatternMap object containing the pattern
+     * Part 2: Utility Static Method to display the banner
+     * @param message The word to display
+     * @param patternMap The map containing our letter patterns
      */
-    public static CharacterPatternMap getCharacterPattern(char c) {
-        if (c == 'O') {
-            return new CharacterPatternMap('O', new String[]{
-                "  *** ", " ** ** ", "** ** ", "** ** ", "** ** ", " ** ** ", "  *** "
-            });
-        } else if (c == 'P') {
-            return new CharacterPatternMap('P', new String[]{
-                " ***** ", " ** ** ", " ** ** ", " ***** ", " ** ", " ** ", " ** "
-            });
-        } else if (c == 'S') {
-            return new CharacterPatternMap('S', new String[]{
-                " ***** ", " ** ", " ** ", " *** ", "   ** ", "   ** ", " ***** "
-            });
-        }
-        return null; // Return null if character is not found
-    }
-
-    /**
-     * Part 4: Main Method
-     */
-    public static void main(String[] args) {
-        
-        // Array of Objects to manage multiple characters for the word "OOPS"
-        CharacterPatternMap[] oopsArray = {
-            getCharacterPattern('O'),
-            getCharacterPattern('O'),
-            getCharacterPattern('P'),
-            getCharacterPattern('S')
-        };
-
-        // Array to hold the final assembled 7 lines of the banner
-        String[] banner = new String[7];
-
-        // Loop through 7 lines, using StringBuilder for efficient concatenation
+    public static void displayBanner(String message, Map<Character, String[]> patternMap) {
+        // Outer loop: iterates through the 7 lines of the banner
         for (int i = 0; i < 7; i++) {
             StringBuilder sb = new StringBuilder();
             
-            // Loop through each letter object in our word
-            for (CharacterPatternMap letterMap : oopsArray) {
-                sb.append(letterMap.getPattern()[i]);
+            // Inner loop: iterates through each character in the message (O, O, P, S)
+            for (char c : message.toCharArray()) {
+                String[] pattern = patternMap.get(c);
+                if (pattern != null) {
+                    sb.append(pattern[i]);
+                }
             }
-            
-            // Convert the built string and store it in our final banner array
-            banner[i] = sb.toString();
+            // Print the fully assembled line
+            System.out.println(sb.toString());
         }
+    }
 
-        // Output the final banner
-        for (String line : banner) {
-            System.out.println(line);
-        }
+    /**
+     * Part 3: Main Method
+     */
+    public static void main(String[] args) {
+        // 1. Build the dictionary of letter patterns
+        Map<Character, String[]> patternMap = createPatternMap();
+
+        // 2. Render the banner using our reusable display function
+        displayBanner("OOPS", patternMap);
     }
 }
